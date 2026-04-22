@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+app:
+  service-name: devops-cicd-lab
+  version: 1.0.0
+
+feature:
+  new-greeting: false
