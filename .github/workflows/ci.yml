@@ -53,6 +53,11 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: [17, 21]
+    name: test (java ${{ matrix.java-version }})
     defaults:
       run:
         working-directory: app
@@ -63,7 +68,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: ${{ matrix.java-version }}
           cache: maven
 
       - name: Run tests
@@ -73,7 +78,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
+          name: test-results-java-${{ matrix.java-version }}
           path: app/target/surefire-reports/
 
   security-scan:
