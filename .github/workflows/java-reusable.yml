@@ -1,0 +1,37 @@
+name: Java Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      job-name:
+        required: true
+        type: string
+      run-command:
+        required: true
+        type: string
+      java-version:
+        required: true
+        type: string
+
+jobs:
+  java-job:
+    runs-on: ubuntu-latest
+    name: ${{ inputs.job-name }}
+
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ inputs.java-version }}
+          cache: maven
+
+      - name: Run command
+        run: ${{ inputs.run-command }}

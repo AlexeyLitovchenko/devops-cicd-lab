@@ -33,22 +33,11 @@ jobs:
 
   lint:
     needs: build
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: app
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: maven
-
-      - name: Run Checkstyle
-        run: ./mvnw checkstyle:check
+  uses: ./.github/workflows/java-reusable.yml
+  with:
+    job-name: "lint"
+    run-command: "./mvnw checkstyle:check"
+    java-version: "17"
 
   test:
     needs: build
