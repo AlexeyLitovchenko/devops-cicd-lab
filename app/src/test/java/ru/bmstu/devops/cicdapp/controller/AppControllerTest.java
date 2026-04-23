@@ -41,7 +41,7 @@ class AppControllerTest {
         void shouldReturnClassicGreetingWhenFeatureDisabled() throws Exception {
             mockMvc.perform(get("/greeting"))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.message").value("Hello from the classic greeting!"));
+                    .andExpect(jsonPath("$.message").value("Hello from the TBD demo greeting!"));
         }
     }
 
