@@ -39,6 +39,6 @@ public class AppController {
         if (newGreetingEnabled) {
             return Map.of("message", "Hello from the new greeting feature!");
         }
-        return Map.of("message", "Hello from the classic greeting!");
+        return Map.of("message", "Hello from the TBD demo greeting!");
     }
 }
